@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | H302 LLC</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <div class="logo">H302 LLC</div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <h1>Contact Us</h1>
+      <p>Tell us what you want to automate.</p>
+
+      <form id="contactForm" class="contact-form">
+        <input type="text" name="Name" placeholder="Your Name" required />
+        <input type="email" name="Email" placeholder="Your Email" required />
+        <textarea name="Question" placeholder="What would you like to automate?" rows="6" required></textarea>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+      </form>
+
+      <p id="formStatus"></p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 H302 LLC. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById("contactForm");
+    const status = document.getElementById("formStatus");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const payload = Object.fromEntries(formData.entries());
+
+      try {
+        const response = await fetch("YOUR_N8N_WEBHOOK_URL_HERE", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+          status.textContent = "Thanks — your message was sent successfully.";
+          form.reset();
+        } else {
+          status.textContent = "Something went wrong. Please try again.";
+        }
+      } catch (error) {
+        status.textContent = "Unable to send right now. Please try again later.";
+      }
+    });
+  </script>
+</body>
+</html>
