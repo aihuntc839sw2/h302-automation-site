@@ -55,6 +55,17 @@
       </form>
 
       <p id="formStatus" class="form-status"></p>
+
+      <div id="bookingCta" class="booking-cta" style="display: none;">
+        <a
+          class="btn btn-secondary"
+          href="https://calendar.app.google/prXvjjmaPT5Wxf497"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Or book a discovery call
+        </a>
+      </div>
     </div>
   </main>
 
@@ -67,12 +78,14 @@
   <script>
     const form = document.getElementById("contactForm");
     const status = document.getElementById("formStatus");
+    const bookingCta = document.getElementById("bookingCta");
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
       status.textContent = "Sending...";
       status.className = "form-status";
+      bookingCta.style.display = "none";
 
       const formData = new FormData(form);
       const payload = new URLSearchParams(formData);
@@ -84,8 +97,9 @@
         });
 
         if (response.ok) {
-          status.textContent = "Thanks — your message was sent successfully.";
+          status.textContent = "Thanks — your message was sent successfully. Want to speak sooner? Book a discovery call below.";
           status.className = "form-status success";
+          bookingCta.style.display = "block";
           form.reset();
         } else {
           status.textContent = "Something went wrong. Please try again.";
