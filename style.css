@@ -247,6 +247,7 @@ h3 {
 .btn-primary {
   background: var(--primary);
   color: #071422;
+  border: none;
 }
 
 .btn-primary:hover {
@@ -333,7 +334,6 @@ h3 {
 }
 
 .contact-form button {
-  border: none;
   cursor: pointer;
   width: fit-content;
 }
@@ -350,6 +350,10 @@ h3 {
 
 .form-status.error {
   color: #fca5a5;
+}
+
+.booking-cta {
+  margin-top: 18px;
 }
 
 .site-footer {
